@@ -1,0 +1,17 @@
+# Ignore Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Ignore environment
+venv/
+.env/
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore migrations if necessary
+*/migrations/__pycache__/

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+</head>
+<body>
+    <h1>My Blog Posts</h1>
+
+    {% for post in posts %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        <p><strong>Author:</strong> {{ post.author }}</p>
+        <p><em>Date Posted:</em> {{ post.date_posted|date:"Y-m-d H:i" }}</p>
+        <hr>
+    {% empty %}
+        <p>No posts available yet.</p>
+    {% endfor %}
+
+    <a href="{% url 'add_post' %}">Add a new post</a>
+</body>
+</html>
