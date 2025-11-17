@@ -1,22 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>My Blog</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-    <h1>My Blog Posts</h1>
 
+<div class="container">
+    <h1 class="header-title">My Blog</h1>
+
+    <!-- Add Post FAB -->
+    <a href="{% url 'add_post' %}" class="fab add-fab">+</a>
+
+    <!-- Blog posts list -->
     {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content }}</p>
-        <p><strong>Author:</strong> {{ post.author }}</p>
-        <p><em>Date Posted:</em> {{ post.date_posted|date:"Y-m-d H:i" }}</p>
-        <hr>
+        <div class="post-card">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-content">{{ post.content }}</p>
+            <small><strong>Author:</strong> {{ post.author.username }}</small><br>
+            <span class="post-date">Posted on: {{ post.date_posted }}</span>
+        </div>
     {% empty %}
-        <p>No posts available yet.</p>
+        <p>No posts yet.</p>
     {% endfor %}
+</div>
 
-    <a href="{% url 'add_post' %}">Add a new post</a>
+<!-- Back to Top FAB -->
+<a href="#" class="fab top-fab" id="backToTop">↑</a>
+
+<script>
+    // Show/hide back to top button
+    const topButton = document.getElementById('backToTop');
+
+    window.onscroll = function () {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            topButton.style.display = "flex";
+        } else {
+            topButton.style.display = "none";
+        }
+    };
+
+    // Scroll to top
+    topButton.onclick = function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+</script>
+
 </body>
 </html>
